@@ -1,0 +1,28 @@
+body
+{
+    background-color:#d0e4fe;
+}
+h1
+{
+    font-family:"经典行书简";
+    font-size:60;
+    color:purple;
+    text-align:center;
+    padding:20px 0px 0px 0px;
+}
+#search-form
+{
+    text-align:center;
+}
+#pages
+{
+    padding:10px 0px 0px 80px;
+}
+li
+{
+    padding:2px 0px 5px 0px;
+}
+ul
+{
+    padding:10px 0px 10px 100px;
+}

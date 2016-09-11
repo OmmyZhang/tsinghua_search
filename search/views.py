@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 import cPickle as pickle
 import jieba
+import re
 
 infor = pickle.load(open('data/infor.data','r'))
 dic   = pickle.load(open('data/dic.data','r'))
@@ -11,7 +12,7 @@ dic   = pickle.load(open('data/dic.data','r'))
 
 def index(request):
     s = ''
-    ONE_PAGE = 1000
+    ONE_PAGE = 500
     try:
         s = request.GET['keywords']
         print s
@@ -40,7 +41,11 @@ def index(request):
         result = []
         if find:
             for date in find:
-                result.append(infor[date])
+                tmp = infor[date]
+                tmp[1] = re.sub(r'&.*?;','',tmp[1])
+                tmp[2] = re.sub(r'<.*?>','',tmp[2])
+
+                result.append(tmp)
         else:
             result = [['?keyword=','Nothing','SAD STORY']]
         
