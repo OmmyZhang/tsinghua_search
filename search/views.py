@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 import cPickle as pickle
+import jieba
 
 infor = pickle.load(open('data/infor.data','r'))
 dic   = pickle.load(open('data/dic.data','r'))
@@ -18,7 +19,12 @@ def index(request):
     except:
         result = []
     else:
-        keys = s.split()
+        sp = s.split()
+        keys =[]
+        
+        for one_part in sp:
+            keys +=  jieba.lcut(one_part,cut_all=False)
+        
         for i,one_key in enumerate(keys):
             print '[',one_key,']'
             if dic.has_key(one_key):
