@@ -11,6 +11,7 @@ dic   = pickle.load(open('data/dic.data','r'))
 
 def index(request):
     s = ''
+    ONE_PAGE = 1000
     try:
         s = request.GET['keywords']
         print s
@@ -18,6 +19,8 @@ def index(request):
             go_to_die
     except:
         result = []
+        p_num = 1
+        cur_p = 1
     else:
         sp = s.split()
         keys =[]
@@ -39,11 +42,26 @@ def index(request):
             for date in find:
                 result.append(infor[date])
         else:
-            result = [['','Nothing','SAD STORY']]
+            result = [['?keyword=','Nothing','SAD STORY']]
         
         print len(result)
+        p_num = (len(result) -1) / ONE_PAGE + 1;
+        
+        if request.GET.has_key('page'):
+            cur_p = int(request.GET['page'])
+        else:
+            cur_p = 1
+        
+        st = (cur_p-1) * ONE_PAGE
+        en = min( cur_p * ONE_PAGE - 1,len(result) )
+        result = result[st:en]
     #print result 
+    
+    if p_num == 1:
+        p_num = 0
     return render(request,'search/index.html',{
         'result':result,
         'word'  :s,
+        'pages' : range(1,p_num+1),
+        'cur_p' : cur_p
         })

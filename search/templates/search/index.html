@@ -5,6 +5,19 @@
     <input type="submit" value="搜索" >
 </form>
 
-{% for news in result %}
-<li> <a href ="{{news.0}}"> 【{{news.2}}】 {{news.1}}  </a></li>
+<div>
+{% for page in pages %}
+    {% if page == cur_p %}
+        {{page}}
+    {% else %}
+        <a href = "?keywords={{word}}&page={{page}}"> {{page}} </a>
+    {% endif %}
+{%if not forloop.last %}|{% endif %} 
 {% endfor %}
+</div>
+
+<ul>
+{% for news in result %}
+    <li> <a href ="{{news.0}}"> 【{{news.2}}】 {{news.1}}  </a></li>
+{% endfor %}
+</ul>
