@@ -1,3 +1,6 @@
+{% load static %}
+<link href="{% static "css/search.css"%}" rel="stylesheet" type="text/css" />
+<body>
 <h1> 清华搜索 </h1>
 
 <form id="search-form" method = "GET" action = {% url 'index' %} >
@@ -5,7 +8,7 @@
     <input type="submit" value="搜索" >
 </form>
 
-<div>
+<div id="pages">
 {% for page in pages %}
     {% if page == cur_p %}
         {{page}}
@@ -21,3 +24,4 @@
     <li> <a href ="{{news.0}}"> 【{{news.2}}】 {{news.1}}  </a></li>
 {% endfor %}
 </ul>
+</body>
