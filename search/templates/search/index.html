@@ -1,0 +1,10 @@
+<h1> 清华搜索 </h1>
+
+<form id="search-form" method = "GET" action = {% url 'index' %} >
+    关键词：<input type="text" name="keywords" value= "{{word}}" >
+    <input type="submit" value="搜索" >
+</form>
+
+{% for news in result %}
+<li> <a href ="{{news.0}}"> 【{{news.2}}】 {{news.1}}  </a></li>
+{% endfor %}
